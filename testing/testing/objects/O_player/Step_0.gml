@@ -1,19 +1,31 @@
+
 if keyboard_check(ord("A"))
 {
 	image_xscale=-1;
-	sprite_index=S_player_walk;
-	hspeed_=-5;
+    sprite_index=S_player_walk;
+	hspeed_=-running_hspeed_;
 }else if keyboard_check(ord("D"))
 {
 	image_xscale=1;
 	sprite_index=S_player_walk;
-	hspeed_=5;
+	hspeed_=running_hspeed_;
 }else
 {
-	
 	sprite_index=S_player_idle_side;
 	hspeed_=0;
 }
+if keyboard_check(vk_lshift)
+{
+	sprite_index=S_player_run;
+	running_hspeed_=9;
+}else
+{
+	
+	running_hspeed_=5;
+}
+
+
+
 if !place_meeting(x, y+5, O_wall)
 {
 	vspeed_ =vspeed_+gravity_;
@@ -26,6 +38,7 @@ else
 	vspeed_=-30;
     } 
 }
+
 
 if place_meeting(x+hspeed_,y,O_wall)
 {
